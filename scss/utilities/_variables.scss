@@ -1,0 +1,35 @@
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+// Font Stacks
+
+$font-url--google : 'https://fonts.googleapis.com/css?family=Open+Sans:400';
+$font-family--primary: 'Open Sans', sans-serif;
+$font-family--secondary: 'Open Sans', sans-serif;
+
+// Descriptive Base Colors
+
+$silver-chalice : #B2B2B2;
+$alabaster      : #FCFCFC;
+$olso-grey      : #83898D;
+$river-bed      : #404A51;
+$tundora        : #4A4A4A;
+
+// Font Weights
+
+$font-weight--thin       : 100;
+$font-weight--light      : 300;
+$font-weight--medium     : 400;
+$font-weight--bold       : 700;
+$font-weight--extra-bold : 900;
+
+// Text
+
+$base__font-size : 16px;
+
+// Breakpoints
+
+$brkpoint-sm    : 1px;
+$brkpoint-md    : 767px;
+$brkpoint-lg    : 1024px;

@@ -1,0 +1,23 @@
+// ==========================================================================
+// Layout
+// ==========================================================================
+
+// Calculate grid columns
+
+.grid__col {
+    @include g-columns; 
+}
+
+// Wrapper for Employee Directory
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: em(30px) auto;
+
+    h1 {
+        font-size: em(25px);
+        padding-left: em(15px);
+    }
+}

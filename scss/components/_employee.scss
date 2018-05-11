@@ -1,0 +1,40 @@
+// ==========================================================================
+// Employee
+// ==========================================================================
+
+// Employee Wrapper 
+
+.employee {
+    padding: em(20px);
+
+    @include e(wrapper) {
+        border: em(2px) solid $silver-chalice;
+        border-radius: 0.4em;
+        background-color: white;
+        padding: em(20px);
+        display: flex;
+        cursor: pointer;
+    }
+
+    @include e(content) {
+        margin: auto;
+    }
+
+    img {
+        //float: left;
+        border-radius: 50%;
+    }
+
+    h2,
+    p {
+        margin: em(4px) 0;
+    }
+
+    h2 {
+        color: $river-bed;
+    }
+
+    p {
+        color: $olso-grey;
+    }
+}
