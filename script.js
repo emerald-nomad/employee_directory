@@ -1,6 +1,3 @@
-import Modal from './js/modal.js';
-import Format from './js/format.js';
-
 const url = 'https://randomuser.me/api/?nat=us&results=12';
 let employees = new Array;
 

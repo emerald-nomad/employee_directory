@@ -42,7 +42,7 @@ let next = () => {
 
 let stopPropagation = event => event.stopPropagation();
 
-export default {
+const Modal = {
     open: open,
     close: close,
     prev: prev,

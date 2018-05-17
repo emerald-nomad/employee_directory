@@ -191,7 +191,7 @@ let formatAddress = (street, city, state, post) => {
     return str
 }
 
-export default {
+const Format = {
     name: formatName,
     dob: formatDOB,
     address: formatAddress,
