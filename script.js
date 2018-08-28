@@ -1,13 +1,13 @@
-const url = 'https://randomuser.me/api/?nat=us&results=12';
-let employees = new Array;
+const url = "https://randomuser.me/api/?nat=us&results=12";
+let employees = new Array();
 
 let addEmployees = arr => {
-    arr.forEach((emp, index) => {
-        let employee = document.createElement('div');
-        employee.classList.add('grid__col--4');
-        employee.classList.add('employee');
+  arr.forEach((emp, index) => {
+    let employee = document.createElement("div");
+    employee.classList.add("grid__col--4");
+    employee.classList.add("employee");
 
-        employee.innerHTML = `
+    employee.innerHTML = `
                     <div key="${index}" class="employee__wrapper">
                         <img key="${index}" src="${emp.image}" alt="">
                         <div class="employee__content">
@@ -18,16 +18,16 @@ let addEmployees = arr => {
                     </div>
                 `;
 
-        document.querySelector('.wrapper').appendChild(employee);
-    })
-}
+    document.querySelector(".wrapper").appendChild(employee);
+  });
+};
 
 let addModal = employess => {
-    let modal = document.createElement('div');
-    modal.setAttribute('id', 'modal');
-    modal.classList.add('modal');
+  let modal = document.createElement("div");
+  modal.setAttribute("id", "modal");
+  modal.classList.add("modal");
 
-    modal.innerHTML = `
+  modal.innerHTML = `
         
        
         <div class="modal__content">
@@ -38,14 +38,14 @@ let addModal = employess => {
         
     `;
 
-    document.querySelector('body').appendChild(modal);
+  document.querySelector("body").appendChild(modal);
 
-    employees.forEach((employee, index) => {
-        let emp = document.createElement('div');
-        emp.classList.add('modal__slide');
-        emp.setAttribute('key', index);
+  employees.forEach((employee, index) => {
+    let emp = document.createElement("div");
+    emp.classList.add("modal__slide");
+    emp.setAttribute("key", index);
 
-        emp.innerHTML = `
+    emp.innerHTML = `
             <img src=${employee.image} alt="${employee.name}"/>
             <h2>${employee.name}</h2>
             <p>${employee.email}</p>
@@ -55,53 +55,54 @@ let addModal = employess => {
             <p>${employee.address}</p>
             <p>Birthday: ${employee.dob}</p>
         `;
-        
-        document.querySelector('.modal__content').appendChild(emp)
-    });
-    
-}
+
+    document.querySelector(".modal__content").appendChild(emp);
+  });
+};
 
 let eventListeners = () => {
-    document.querySelectorAll('.employee__wrapper').forEach((employee, index) => {
-        employee.addEventListener('click', () => Modal.open(index));
+  document.querySelectorAll(".employee__wrapper").forEach((employee, index) => {
+    employee.addEventListener("click", () => Modal.open(index));
+  });
+
+  document
+    .querySelector(".modal__close")
+    .addEventListener("click", Modal.close);
+  document.querySelector(".modal").addEventListener("click", Modal.close);
+  document.querySelector(".prev").addEventListener("click", Modal.prev);
+  document.querySelector(".next").addEventListener("click", Modal.next);
+  document
+    .querySelector(".modal__content")
+    .addEventListener("click", Modal.stopPropagation);
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch(url)
+    .then(resp => resp.json())
+    .then(data => {
+      data.results.forEach(employee => {
+        console.log(employee);
+        let e = {
+          image: employee.picture.large,
+          name: Format.name(employee.name.first, employee.name.last),
+          username: employee.login.username,
+          email: employee.email,
+          phone: employee.phone,
+          dob: Format.dob(employee.dob.date),
+          state: Format.string(employee.location.state),
+          address: Format.address(
+            employee.location.street,
+            employee.location.city,
+            employee.location.state,
+            employee.location.postcode
+          )
+        };
+        employees.push(e);
+      });
+    })
+    .then(() => {
+      addEmployees(employees);
+      addModal(employees);
+      eventListeners();
     });
-
-    document.querySelector('.modal__close').addEventListener('click', Modal.close);
-    document.querySelector('.modal').addEventListener('click', Modal.close);
-    document.querySelector('.prev').addEventListener('click', Modal.prev);
-    document.querySelector('.next').addEventListener('click', Modal.next);
-    document.querySelector('.modal__content').addEventListener('click',Modal.stopPropagation);
-}
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetch(url)
-        .then(resp => resp.json())
-        .then(data => {
-            data.results.forEach(employee => {
-                let e = {
-                    image: employee.picture.large,
-                    name: Format.name(employee.name.first, employee.name.last),
-                    username: employee.login.username,
-                    email: employee.email,
-                    phone: employee.phone,
-                    dob: Format.dob(employee.dob),
-                    state: Format.string(employee.location.state),
-                    address: Format.address(
-                        employee.location.street,
-                        employee.location.city,
-                        employee.location.state,
-                        employee.location.postcode
-                    ),
-                }
-                employees.push(e);
-            });
-        })
-        .then(() => {
-            addEmployees(employees);
-            addModal(employees);
-            eventListeners();
-        }
-        );
 });
